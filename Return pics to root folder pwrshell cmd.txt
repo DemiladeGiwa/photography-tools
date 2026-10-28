@@ -1,0 +1,34 @@
+## PowerShell script to move all image files from group subfolders to the main folder
+# Adjust the path if your main folder is located elsewhere
+$MainFolder = "E:/DCIM/100CANON"
+
+# Image extensions to move (case‑insensitive)
+$ImageExtensions = @('*.jpg','*.jpeg','*.png','*.gif','*.bmp','*.tif','*.tiff','*.webp','*.cr2')
+
+# Find all image files in any subdirectory (exclude files already in the main folder)
+$ImageFiles = Get-ChildItem -Path $MainFolder -Recurse -File -Include $ImageExtensions |
+    Where-Object { $_.DirectoryName -ne $MainFolder }
+
+foreach ($File in $ImageFiles) {
+    try {
+        $Destination = Join-Path $MainFolder $File.Name
+        # If a file with the same name exists, rename the incoming file to avoid overwriting
+        if (Test-Path $Destination) {
+            $Base = [System.IO.Path]::GetFileNameWithoutExtension($File.Name)
+            $Ext  = $File.Extension
+            $i = 1
+            do {
+                $NewName = "{0}_{1}{2}" -f $Base, $i, $Ext
+                $Destination = Join-Path $MainFolder $NewName
+                $i++
+            } while (Test-Path $Destination)
+        }
+        Move-Item -LiteralPath $File.FullName -Destination $Destination -Force
+        Write-Host "Moved $($File.FullName) -> $Destination"
+    } catch {
+        Write-Error "Failed to move $($File.FullName): $_"
+    }
+}
+
+Write-Host "All images have been moved to $MainFolder"
+

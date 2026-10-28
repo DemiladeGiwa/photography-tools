@@ -1,0 +1,17 @@
+# Required
+opencv-python>=4.5.0
+numpy>=1.19.0
+Pillow>=8.0.0
+
+# RAW files (strongly recommended). Without rawpy, RAW files that have a
+# matching JPEG still work - the JPEG is used for previews and analysis.
+rawpy>=0.16.0
+exifread>=3.0.0
+
+# Nice to have
+send2trash>=1.8                         # Recycle Bin on every platform
+windnd>=1.0.7; sys_platform == "win32"  # drag a folder onto the window
+# pillow-heif>=0.10                     # iPhone .HEIC photos
+
+# Tests
+pytest>=7.0.0

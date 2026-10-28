@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "photo-sorter"
+version = "4.3.0"
+description = "Photography Tools: cull, group, organise and export photo shoots - one window, one analysis pass."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Demi" }]
+keywords = ["photography", "culling", "raw", "lightroom", "blur-detection", "burst", "organizer", "xmp"]
+classifiers = [
+    "Environment :: Win32 (MS Windows)",
+    "Intended Audience :: End Users/Desktop",
+    "Topic :: Multimedia :: Graphics",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "opencv-python>=4.5.0",
+    "numpy>=1.19.0",
+    "Pillow>=8.0.0",
+]
+
+[project.optional-dependencies]
+raw = ["rawpy>=0.16.0", "exifread>=3.0.0"]
+extras = ["send2trash>=1.8", "windnd>=1.0.7; sys_platform == 'win32'", "pillow-heif>=0.10"]
+dev = ["pytest>=7.0.0"]
+all = ["rawpy>=0.16.0", "exifread>=3.0.0", "send2trash>=1.8", "windnd>=1.0.7; sys_platform == 'win32'",
+       "pytest>=7.0.0"]
+
+[project.scripts]
+photo-tools-cli = "photo_sorter.__main__:main"
+
+[project.gui-scripts]
+photo-tools = "photo_sorter.gui.app:main"
+
+[tool.setuptools.packages.find]
+include = ["photo_sorter*"]
+
+[tool.setuptools.package-data]
+"photo_sorter.gui" = ["assets/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["photo_sorter/tests"]
