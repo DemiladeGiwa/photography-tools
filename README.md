@@ -1,5 +1,7 @@
 # Photography Tools (v4.3)
 
+**[Download the Windows installer (v4.3.0)](https://github.com/DemiladeGiwa/photography-tools/raw/main/download/PhotographyTools-4.3.0-Setup.exe)** · no Python needed. Windows may warn that the app isn't code-signed: click **More info › Run anyway**.
+
 A fast desktop app for getting through a shoot. You can cull it, find bursts and duplicates, auto-pick the keepers, sort everything into folders and hand the result to Lightroom, all from one window.
 
 Open a folder and it's analysed once in the background. Every screen then works from that same analysis and the same decisions. The results are cached, so reopening a folder is instant.
